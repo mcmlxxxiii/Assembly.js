@@ -1,0 +1,12 @@
+<% _(weather.icons).each(function (group) { %>
+    <div class="weather-cond-group"><img src="<%= group[0] %>" />&nbsp;<span><%= group[1] %></span></div>
+<% }) %>
+
+<dl class="weather">
+  <dt>Temperature</dt>
+  <dd><%= weather.temperature %> &#8457;</dd>
+  <dd class="small">Min: <%= weather.minTemperature %> &#8457;</dd>
+  <dd class="small">Max: <%= weather.maxTemperature %> &#8457;</dd>
+  <dt>Humidity</dt>
+  <dd><%= weather.humidity %>%</dd>
+</dl>

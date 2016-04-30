@@ -1,0 +1,5 @@
+Links
+
+<p>This is <a data-role="app-link" href="#/bad" class="underlined">a link</a> that does not have a route defined for it. It should result in a "Not Found!" view.</p>
+
+<p>And this is <a data-role="app-link" href="#/failing" class="underlined">a link</a> that maps to a route with an always rejecting action.</p>

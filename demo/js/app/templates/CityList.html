@@ -1,0 +1,7 @@
+<ul class="cities">
+<% _(cityList).each(function (city) { %>
+    <li>
+        <a href="<%= city.getLinkTo() %>" data-role="app-link"><%= city.name %></a>
+    </li>
+<% }) %>
+</ul>

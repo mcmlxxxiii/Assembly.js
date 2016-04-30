@@ -1,0 +1,113 @@
+html {
+    font-family: sans-serif;
+}
+
+body {
+    color: black;
+    margin: 0;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a.underlined {
+    text-decoration: underline;
+}
+
+header {
+    padding: 25px;
+    background-color: gold;
+}
+
+header h1 {
+    margin: 0;
+}
+
+
+header p {
+    margin-top: 5px;
+    ext-transform: uppercase;
+    font-size: 11px;
+}
+
+header p a {
+    font-weight: bold;
+}
+
+section {
+    padding: 25px;
+}
+
+section h1 small {
+    font-size: 13px;
+    font-weight: normal;
+}
+
+
+ul {
+    padding: 0;
+}
+
+ul li {
+    background-color: goldenrod;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    list-style-type: none;
+    padding: 5px 8px 3px 8px;
+    margin-right: 5px;
+    margin-bottom: 8px;
+    display: inline-block;
+    line-height: 1.321em;
+}
+
+ul li.active {
+    background: none;
+    padding-bottom: 0;
+    border-bottom: 3px solid black;
+}
+
+ul li a {
+    text-decoration: none;
+}
+
+ul li a:hover {
+    text-decoration: none;
+}
+
+ul.menu {
+    margin-top: 30px;
+    margin-bottom: 0;
+}
+
+ul.cities li {
+    background-color: gold;
+    white-space: nowrap;
+}
+
+div.weather-cond-group {
+    color: gray;
+    font-size: 11px;
+}
+
+div.weather-cond-group img {
+    vertical-align: middle;
+    color: gray;
+}
+
+dl.weather dt {
+    margin-top: 10px;
+}
+dl.weather dd {
+    font-size: 27px;
+}
+dl.weather dd.small {
+    font-size: 11px;
+}
+

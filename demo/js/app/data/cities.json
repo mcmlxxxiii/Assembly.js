@@ -1,0 +1,12 @@
+[
+    {"name": "Los Angeles", "abbr": "LA", "countryCode": "US"},
+    {"name": "San Diego", "abbr": "SD", "countryCode": "US"},
+    {"name": "San Jose", "abbr": "SJ", "countryCode": "US"},
+    {"name": "San Francisco", "abbr": "SF", "countryCode": "US"},
+    {"name": "Fresno", "countryCode": "US"},
+    {"name": "Sacramento", "countryCode": "US"},
+    {"name": "Long Beach", "abbr": "LONG", "countryCode": "US"},
+    {"name": "Oakland", "countryCode": "US"},
+    {"name": "Bakersfield", "abbr": "BFD", "countryCode": "US"},
+    {"name": "Anaheim", "abbr": "ANA", "countryCode": "US"}
+]
