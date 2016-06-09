@@ -8,13 +8,13 @@ var require = {
     paths: {
         Assembly: '../../src/Assembly',
         'Assembly/compat': '../../src/Assembly.compat.jQuery',
-        'Assembly/util/Router': '../../src/util/Router',
-        'Assembly/util/MiddlewareRunner': '../../src/util/MiddlewareRunner',
-        'Assembly/util/MiddlewareEngine': '../../src/util/MiddlewareEngine',
-        'Assembly/features/Middleware': '../../src/features/Middleware',
-        'Assembly/features/AppInit': '../../src/features/AppInit',
-        'Assembly/features/Navigation': '../../src/features/Navigation',
-        'Assembly/features/RequestHandling': '../../src/features/RequestHandling',
+        'Assembly/contrib/util/Router': '../../src/contrib/util/Router',
+        'Assembly/contrib/util/MiddlewareRunner': '../../src/contrib/util/MiddlewareRunner',
+        'Assembly/contrib/util/MiddlewareEngine': '../../src/contrib/util/MiddlewareEngine',
+        'Assembly/contrib/features/Middleware': '../../src/contrib/features/Middleware',
+        'Assembly/contrib/features/AppInit': '../../src/contrib/features/AppInit',
+        'Assembly/contrib/features/Navigation': '../../src/contrib/features/Navigation',
+        'Assembly/contrib/features/RequestHandling': '../../src/contrib/features/RequestHandling',
         jquery: './lib/jquery-2.2.0.min',
         underscore: './lib/underscore-1.8.3.min',
         text: './lib/require-text-2.0.14'
@@ -30,24 +30,24 @@ var require = {
             exports: 'Assembly/compat'
         },
 
-        'Assembly/util/Router': {
+        'Assembly/contrib/util/Router': {
             deps: ['Assembly/compat'],
             exports: 'Router'
         },
 
-        'Assembly/util/MiddlewareRunner': {
+        'Assembly/contrib/util/MiddlewareRunner': {
             deps: ['Assembly/compat'],
             exports: 'MiddlewareRunner'
         },
 
-        'Assembly/util/MiddlewareEngine': {
-            deps: ['Assembly/compat', 'Assembly/util/MiddlewareRunner'],
+        'Assembly/contrib/util/MiddlewareEngine': {
+            deps: ['Assembly/compat', 'Assembly/contrib/util/MiddlewareRunner'],
             exports: 'MiddlewareEngine'
         },
 
-        'Assembly/features/Middleware': ['Assembly', 'Assembly/util/MiddlewareEngine'],
-        'Assembly/features/AppInit': ['Assembly'],
-        'Assembly/features/Navigation': ['Assembly'],
-        'Assembly/features/RequestHandling': ['Assembly']
+        'Assembly/contrib/features/Middleware': ['Assembly', 'Assembly/contrib/util/MiddlewareEngine'],
+        'Assembly/contrib/features/AppInit': ['Assembly'],
+        'Assembly/contrib/features/Navigation': ['Assembly'],
+        'Assembly/contrib/features/RequestHandling': ['Assembly']
     }
 };

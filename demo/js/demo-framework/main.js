@@ -4,10 +4,10 @@ define([
     './features/requirejs_Routing',
     './features/requirejs_Settings',
     './features/requirejs_ActionHandling',
-    'Assembly/features/Middleware',
-    'Assembly/features/AppInit',
-    'Assembly/features/Navigation',
-    'Assembly/features/RequestHandling'],
+    'Assembly/contrib/features/Middleware',
+    'Assembly/contrib/features/AppInit',
+    'Assembly/contrib/features/Navigation',
+    'Assembly/contrib/features/RequestHandling'],
 
 function (Assembly) {
 
