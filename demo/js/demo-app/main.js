@@ -1,8 +1,9 @@
-define(['Assembly', 'underscore'],
+define(['DemoFramework', 'underscore'],
 
-function (Application, _) {
+function (DemoFramework, _) {
 
-    var app = new Application('DemoApp', {
+    var app = new DemoFramework.Application({
+        name: 'DemoApp',
         baseUri: window.location.pathname,
         navigation: 'anchor',
         defineAppMediator: true,

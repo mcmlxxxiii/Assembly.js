@@ -1,56 +1,8 @@
-define(['Assembly/compat'], function (compat) {
+define(['Assembly'], function (Assembly) {
 
-    function Core_ActionHandling(input, proceed, terminate) {
-        var app = input.app;
-        var priv = input.priv;
-        var config = input.config;
+    var compat = Assembly.compat;
 
-        priv.ensureFeatures('ActionHandling',
-                ['LeveragingRequirejs', 'MiddlewareEngine', 'Routing'],
-                terminate);
-
-
-        if (typeof app.handleActionSuccess !== 'function') {
-            terminate('#handleActionSuccess not implemented!');
-            return;
-        }
-
-        if (typeof app.handleActionFailure !== 'function') {
-            terminate('#handleActionFailure not implemented!');
-            return;
-        }
-
-        if (config.middleware.indexOf(ActionHandling.MIDDLEWARE_NAME) === -1) {
-            config.middleware.push(ActionHandling.MIDDLEWARE_NAME);
-        }
-
-        priv.middlewareEngine._mwr.makeRequest = function (
-                request, responseReady, responseFailed) {
-
-            var action = compat.Deferred();
-            request.resolvedAction.call(action, request.actionParams);
-            action.done(function (response) {
-                responseReady({
-                    ok: true,
-                    response: response
-                });
-            });
-            action.fail(function (response) {
-                responseReady({
-                    ok: false,
-                    response: response
-                });
-            });
-        };
-
-
-        priv.middlewareEngine.registerMiddleware(ActionHandling.CoreMiddleware);
-
-        priv.features.push('ActionHandling');
-        proceed();
-    };
-
-    var ActionHandling = Core_ActionHandling;
+    var ActionHandling = {};
 
     ActionHandling.ResolveErrorCode = {
         MODULE_NOT_LOADED: 1,
@@ -197,5 +149,57 @@ define(['Assembly/compat'], function (compat) {
         processResponse: ActionHandling.processResponse
     };
 
-    return Core_ActionHandling;
+
+
+
+
+    Assembly.registerFeature('Action_Handling__RequireJS', function (
+            framework, frameworkPrivate, featureConfig) {
+
+
+//        frameworkPrivate.ensureFeatures('ActionHandling',
+//                ['LeveragingRequirejs', 'MiddlewareEngine', 'Routing'],
+//                terminate);
+
+        var Application = framework.Application;
+
+        Application.prototype.handleActionSuccess = function () {
+            throw new Error('Application#handleActionSuccess not implemented!');
+        };
+
+        Application.prototype.handleActionFailure = function () {
+            throw new Error('Application#handleActionFailure not implemented!');
+        };
+
+        this.registerInitializationStep('Add_Action_Handling', function (
+                app, appPrivate, appConfig, proceed, terminate) {
+
+            if (appConfig.middleware.indexOf(ActionHandling.MIDDLEWARE_NAME) === -1) {
+                appConfig.middleware.push(ActionHandling.MIDDLEWARE_NAME);
+            }
+
+            appPrivate.middlewareEngine._mwr.makeRequest = function (
+                    request, responseReady, responseFailed) {
+
+                var action = compat.Deferred();
+                request.resolvedAction.call(action, request.actionParams);
+                action.done(function (response) {
+                    responseReady({
+                        ok: true,
+                        response: response
+                    });
+                });
+                action.fail(function (response) {
+                    responseReady({
+                        ok: false,
+                        response: response
+                    });
+                });
+            };
+
+            appPrivate.middlewareEngine.registerMiddleware(ActionHandling.CoreMiddleware);
+
+            proceed();
+        });
+    });
 });

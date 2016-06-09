@@ -1,32 +1,35 @@
-define([
-    'Assembly/compat',
-    'Assembly/util/misc'],
+Assembly.registerFeature('Navigation', function (
+        framework, frameworkPrivate, featureConfig) {
 
-function (
-    compat,
-    utils) {
+    function objectHasValue(obj, value) {
+        for (var key in obj) {
+            if (obj[key] === value) return key;
+        }
+    }
 
+    var compat = Assembly.compat;
 
-    function Core_Navigation(input, proceed, terminate) {
-        var app = input.app;
-        var priv = input.priv;
-        var config = input.config;
+    frameworkPrivate.NavigationType = {
+        ANCHOR: 'anchor',
+        PATH: 'path'
+    };
 
-        priv.ensureFeatures('Navigation', ['RequestHandling', 'Routing'],
-                terminate);
+    this.registerInitializationStep('Add_Navigation', function (
+            app, appPrivate, appConfig, proceed, terminate) {
 
+        this.dependsOn('Add_Request_Handling', 'Add_Routing');
 
-        var navigationType = utils.objectHasValue(
-                Core_Navigation.Type, config.navigation) ?
-                    config.navigation :
-                    Core_Navigation.Type.ANCHOR;
+        var navigationType = objectHasValue(
+                frameworkPrivate.NavigationType, appConfig.navigation) ?
+                    appConfig.navigation :
+                    frameworkPrivate.NavigationType.ANCHOR;
 
         var nav = {};
         switch (navigationType) {
 
             // NB: uri always includes baseUri.
 
-            case Core_Navigation.Type.ANCHOR:
+            case frameworkPrivate.NavigationType.ANCHOR:
                 nav.getUriFromElement = function (el) {
                     return compat.trim(el.getAttribute('href'));
                 };
@@ -50,7 +53,7 @@ function (
                 };
                 break;
 
-            case Core_Navigation.Type.PATH:
+            case frameworkPrivate.NavigationType.PATH:
                 nav.getUriFromElement = function (el) {
                     return compat.trim(el.getAttribute('href'));
                 };
@@ -58,7 +61,7 @@ function (
                     return loc.pathname;
                 };
                 nav.getPathFromUri = function (uri) {
-                    return priv.stripBaseUri(uri);
+                    return appPrivate.stripBaseUri(uri);
                 };
                 nav.makeUriForPath = function (path) {
                     return nav.baseUri + path;
@@ -68,23 +71,23 @@ function (
 
         // Any navigation parameter may be set/overwritten by the config.
         for (var k in nav) {
-            if (typeof config[k] === 'function') {
-                nav[k] = config[k];
+            if (typeof appConfig[k] === 'function') {
+                nav[k] = appConfig[k];
             }
         }
 
-        nav.baseUri = typeof config.baseUri === 'string' ? config.baseUri : '';
+        nav.baseUri = typeof appConfig.baseUri === 'string' ? appConfig.baseUri : '';
 
         // In case baseUri was overwritten, stripping trailing slashes from it.
         nav.baseUri = nav.baseUri.replace(/\/*$/, '');
 
 
-        nav.linksSelector = typeof config.linksSelector === 'string' ?
-                config.linksSelector : '[data-role=app-link]';
+        nav.linksSelector = typeof appConfig.linksSelector === 'string' ?
+                appConfig.linksSelector : '[data-role=app-link]';
 
 
-        priv.stripBaseUri = function (uri) {
-            if (navigationType === Core_Navigation.Type.PATH) {
+        appPrivate.stripBaseUri = function (uri) {
+            if (navigationType === frameworkPrivate.NavigationType.PATH) {
                 if (uri.substr(0, nav.baseUri.length) === nav.baseUri) {
                     uri = uri.substr(nav.baseUri.length);
                 }
@@ -112,11 +115,11 @@ function (
             app.navigateTo(app.pathFor.apply(app, arguments));
         };
 
-        priv.start.push(function () {
+        appPrivate.start.push(function () {
             window.onpopstate = function (e) {
                 var uri = nav.getUriFromLocationObject(
                                  e.currentTarget.location);
-                uri = priv.stripBaseUri(uri);
+                uri = appPrivate.stripBaseUri(uri);
                 var path = nav.getPathFromUri(uri);
                 app._handleRequest({ path: path });
             };
@@ -127,30 +130,21 @@ function (
                 e.preventDefault();
                 e.stopPropagation();
                 var uri = nav.getUriFromElement(this);
-                uri = priv.stripBaseUri(uri);
+                uri = appPrivate.stripBaseUri(uri);
                 var path = nav.getPathFromUri(uri);
                 app.navigateTo(path);
             });
         });
 
-        priv.start.push(function () {
+        appPrivate.start.push(function () {
             var uri = nav.getUriFromLocationObject(window.location);
-            uri = priv.stripBaseUri(uri);
+            uri = appPrivate.stripBaseUri(uri);
             var path = nav.getPathFromUri(uri);
             app._handleRequest({ path: path });
         });
 
-        priv.nav = nav;
+        appPrivate.nav = nav;
 
-        priv.features.push('Navigation');
         proceed();
-    };
-
-    Core_Navigation.Type = {
-        ANCHOR: 'anchor',
-        PATH: 'path'
-    };
-
-    return Core_Navigation;
+    });
 });
-

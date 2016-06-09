@@ -1,9 +1,4 @@
-define(['Assembly/compat',
-        'Assembly/util/MiddlewareRunner'],
-
-function (compat,
-          MiddlewareRunner) {
-
+var MiddlewareEngine = (function (compat) {
 
     function MiddlewareEngine() {
         this._running = false;
@@ -68,5 +63,5 @@ function (compat,
 
 
     return MiddlewareEngine;
-});
 
+})(Assembly_Compat);

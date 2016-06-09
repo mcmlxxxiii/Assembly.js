@@ -1,4 +1,4 @@
-define(['jquery'],  function ($) {
+var Assembly_Compat = (function ($) {
 
     return {
         Deferred: $.Deferred,
@@ -10,4 +10,5 @@ define(['jquery'],  function ($) {
             $(target).on(eventName, selector, handler);
         }
     };
-});
+
+})(jQuery);

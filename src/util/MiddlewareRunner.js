@@ -1,4 +1,4 @@
-define(['Assembly/compat'], function (compat) {
+var MiddlewareRunner = (function (compat) {
 
     function MiddlewareRunner() {
         this._middlewareContext;
@@ -118,4 +118,5 @@ define(['Assembly/compat'], function (compat) {
     };
 
     return MiddlewareRunner;
-});
+
+})(Assembly_Compat);

@@ -1,6 +1,6 @@
-require(['DemoApp', 'jquery'], function (bootstrap, $) {
+require(['DemoApp'], function (bootstrap) {
     bootstrap().done(function (appContainer) {
-        $('body').append(appContainer);
+        window.document.body.appendChild(appContainer);
     }).fail(function () {
         window.document.writeln('<h1>Please come back later ;(</h1>');
     });

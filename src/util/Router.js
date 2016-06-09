@@ -1,4 +1,4 @@
-define(['Assembly/compat'], function (compat) {
+var Router = (function (compat) {
 
     // Router should not know anything specific about what data in addition to
     // path, pattern, pathParamNames, re, and name do specific routes have.
@@ -102,7 +102,7 @@ define(['Assembly/compat'], function (compat) {
             path = this.path;
         } else if (this.pattern) {
             if (compat.isPlainObject(routeParams)) {
-                // TODO
+                // TODO interpolation by params name.
             } else {
                 path = this.pattern;
                 if (arguments.length == this.pathParamNames.length) {
@@ -201,8 +201,6 @@ define(['Assembly/compat'], function (compat) {
         return route;
     };
 
-    Router.Route = Route;
-
     return Router;
 
-});
+})(Assembly_Compat);
