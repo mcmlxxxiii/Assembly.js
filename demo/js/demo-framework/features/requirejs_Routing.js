@@ -1,4 +1,4 @@
-define(['Assembly', 'Assembly/contrib/util/Router'], function (Assembly, Router) {
+define(['Assembly', 'Assembly/contrib/utils/Router'], function (Assembly, Router) {
 
     Assembly.registerFeature('Routing__RequireJS', function (
             framework, frameworkPrivate, featureConfig) {

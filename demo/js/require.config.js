@@ -8,9 +8,9 @@ var require = {
     paths: {
         Assembly: '../../src/Assembly',
         'Assembly/compat': '../../src/Assembly.compat.jQuery',
-        'Assembly/contrib/util/Router': '../../src/contrib/util/Router',
-        'Assembly/contrib/util/MiddlewareRunner': '../../src/contrib/util/MiddlewareRunner',
-        'Assembly/contrib/util/MiddlewareEngine': '../../src/contrib/util/MiddlewareEngine',
+        'Assembly/contrib/utils/Router': '../../src/contrib/utils/Router',
+        'Assembly/contrib/utils/MiddlewareRunner': '../../src/contrib/utils/MiddlewareRunner',
+        'Assembly/contrib/utils/MiddlewareEngine': '../../src/contrib/utils/MiddlewareEngine',
         'Assembly/contrib/features/Middleware': '../../src/contrib/features/Middleware',
         'Assembly/contrib/features/AppInit': '../../src/contrib/features/AppInit',
         'Assembly/contrib/features/Navigation': '../../src/contrib/features/Navigation',
@@ -30,22 +30,22 @@ var require = {
             exports: 'Assembly/compat'
         },
 
-        'Assembly/contrib/util/Router': {
+        'Assembly/contrib/utils/Router': {
             deps: ['Assembly/compat'],
             exports: 'Router'
         },
 
-        'Assembly/contrib/util/MiddlewareRunner': {
+        'Assembly/contrib/utils/MiddlewareRunner': {
             deps: ['Assembly/compat'],
             exports: 'MiddlewareRunner'
         },
 
-        'Assembly/contrib/util/MiddlewareEngine': {
-            deps: ['Assembly/compat', 'Assembly/contrib/util/MiddlewareRunner'],
+        'Assembly/contrib/utils/MiddlewareEngine': {
+            deps: ['Assembly/compat', 'Assembly/contrib/utils/MiddlewareRunner'],
             exports: 'MiddlewareEngine'
         },
 
-        'Assembly/contrib/features/Middleware': ['Assembly', 'Assembly/contrib/util/MiddlewareEngine'],
+        'Assembly/contrib/features/Middleware': ['Assembly', 'Assembly/contrib/utils/MiddlewareEngine'],
         'Assembly/contrib/features/AppInit': ['Assembly'],
         'Assembly/contrib/features/Navigation': ['Assembly'],
         'Assembly/contrib/features/RequestHandling': ['Assembly']
