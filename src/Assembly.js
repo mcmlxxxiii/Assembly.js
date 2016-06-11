@@ -121,7 +121,7 @@ var Assembly = (function (compat) {
                             step.call(context, input.app, input.appPrivate, input.appConfig, decoratedProceed, terminate);
                         };
 
-                        process.step(level, stepFn);
+                        process.step(level, stepFn, stepName);
                     }
                 });
 

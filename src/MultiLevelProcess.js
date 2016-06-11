@@ -11,7 +11,7 @@ var MultiLevelProcess = (function (compat) {
 
         for (var i = 0; i < steps.length; i++) {
             var run = compat.Deferred();
-            var stepName = steps[i].name;
+            var stepName = steps[i]._name;
 
             run.done((function (msg) { return function () {
                 console.debug(msg);
@@ -33,7 +33,7 @@ var MultiLevelProcess = (function (compat) {
         return compat.when.apply(null, promises);
     };
 
-    MultiLevelProcess.prototype.step = function (levelNum, step) {
+    MultiLevelProcess.prototype.step = function (levelNum, step, stepName) {
 
         if (typeof step !== 'function') {
             throw new Error('Invalid step! (not a function)');
@@ -52,6 +52,8 @@ var MultiLevelProcess = (function (compat) {
         if (!this._stepsByLevel[levelNum]) {
             this._stepsByLevel[levelNum] = [];
         }
+
+        step._name = stepName;
 
         this._stepsByLevel[levelNum].push(step);
         this._knownSteps.push(step);
