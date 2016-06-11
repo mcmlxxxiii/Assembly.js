@@ -1,7 +1,7 @@
 # Assembly.js
 
-A meta framework, a foundation, for building custom web app frameworks from
-reusable feature modules.
+A meta framework for building custom web app frameworks from reusable
+feature modules.
 
 
 ## Why
