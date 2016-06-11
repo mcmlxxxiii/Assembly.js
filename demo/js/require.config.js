@@ -11,6 +11,7 @@ var require = {
         'Assembly/contrib/utils/Router': '../../src/contrib/utils/Router',
         'Assembly/contrib/utils/MiddlewareRunner': '../../src/contrib/utils/MiddlewareRunner',
         'Assembly/contrib/utils/MiddlewareEngine': '../../src/contrib/utils/MiddlewareEngine',
+        'Assembly/MultiLevelProcess': '../../src/MultiLevelProcess',
         'Assembly/contrib/features/Middleware': '../../src/contrib/features/Middleware',
         'Assembly/contrib/features/AppInit': '../../src/contrib/features/AppInit',
         'Assembly/contrib/features/Navigation': '../../src/contrib/features/Navigation',
@@ -21,13 +22,18 @@ var require = {
     },
     shim: {
         Assembly: {
-            deps: ['Assembly/compat'],
+            deps: ['Assembly/compat', 'Assembly/MultiLevelProcess'],
             exports: 'Assembly'
         },
 
         'Assembly/compat': {
             deps: ['jquery'],
             exports: 'Assembly/compat'
+        },
+
+        'Assembly/MultiLevelProcess': {
+            deps: ['Assembly/compat'],
+            exports: 'MultiLevelProcess'
         },
 
         'Assembly/contrib/utils/Router': {
