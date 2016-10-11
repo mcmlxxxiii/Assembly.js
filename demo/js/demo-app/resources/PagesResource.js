@@ -1,13 +1,12 @@
-define(['app', 'models/Page'],
-
-function (app, Page) {
+pkg.privateModule('resources/PagesResource', function () {
+    var pkg = this;
 
     function getPage(name) {
         return $.ajax({
-            url: app.settings.dataApi.pageRawDataUrl(name),
+            url: pkg.settings.dataApi.pageRawDataUrl(name),
             data: 'text',
             dataFilter: function (rawData) {
-                return Page.createFromRawData(rawData);
+                return pkg.models.Page.createFromRawData(rawData);
             }
         });
     };
@@ -16,4 +15,3 @@ function (app, Page) {
         get: getPage
     };
 });
-

@@ -106,9 +106,12 @@ var Assembly = (function (compat) {
 
                         var stepFn = function (input, proceed, terminate) {
                             var context = {
-                                dependsOn: function () {
+                                dependsOnSteps: function () {
                                     var depSteps = Array.prototype.slice.call(arguments);
                                     input.appPrivate.ensurePriorSteps(stepName, depSteps, terminate);
+                                },
+                                dependsOnStep: function () {
+                                    this.dependsOnSteps(arguments[0]);
                                 }
                             };
                             var decoratedProceed = function () {
@@ -116,7 +119,7 @@ var Assembly = (function (compat) {
                                 input.appPrivate.initializeStepsFinished.push(stepName);
                             };
                             if (stepName !== 'Add_Base') {
-                                context.dependsOn('Add_Base');
+                                context.dependsOnStep('Add_Base');
                             }
                             step.call(context, input.app, input.appPrivate, input.appConfig, decoratedProceed, terminate);
                         };

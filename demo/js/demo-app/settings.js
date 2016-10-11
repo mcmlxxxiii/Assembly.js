@@ -1,4 +1,9 @@
-define(['app'], function (app) {
+pkg.privateModule('settings', function () {
+
+    var rootPath = window.location.pathname.substr(
+            0, window.location.pathname.lastIndexOf('/'));
+
+    var packagePath = rootPath + '/js/demo-app';
 
     return {
         openWeatherMapApi: {
@@ -9,9 +14,9 @@ define(['app'], function (app) {
             }
         },
         dataApi: {
-            citiesJsonUrl: app._packagePath + '/data/cities.json',
+            citiesJsonUrl: packagePath + '/data/cities.json',
             pageRawDataUrl: function (pageName) {
-                return app._packagePath + '/data/pages/' + pageName + '.page';
+                return packagePath + '/data/pages/' + pageName + '.page';
             }
         }
     };

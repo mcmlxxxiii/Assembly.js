@@ -1,10 +1,128 @@
 <html>
     <head>
         <title>&hearts;</title>
-        <script src="./js/require.config.js"></script>
-        <script src="./js/lib/require-2.1.22.js" data-main="bootstrap"></script>
         <link rel="stylesheet" href="./css/main.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, shrink-to-fit=no" />
+
+        <script src="./js/lib/jquery-2.2.0.min.js"></script>
+        <script src="./js/lib/underscore-1.8.3.min.js"></script>
+        <script src="./js/lib/Package-0.1.js"></script>
+
+
+
+        <!-- The Assembly stuff. -->
+
+        <script src="../src/Assembly.compat.jQuery.js"></script>
+        <script src="../src/MultiLevelProcess.js"></script>
+        <script src="../src/Assembly.js"></script>
+        <script src="../src/contrib/utils/Router.js"></script>
+        <script src="../src/contrib/utils/MiddlewareRunner.js"></script>
+        <script src="../src/contrib/utils/MiddlewareEngine.js"></script>
+        <script src="../src/contrib/features/Middleware.js"></script>
+        <script src="../src/contrib/features/AppInit.js"></script>
+        <script src="../src/contrib/features/Navigation.js"></script>
+        <script src="../src/contrib/features/RequestHandling.js"></script>
+        <script src="../src/contrib/features/Routing.js"></script>
+        <script src="../src/contrib/features/ActionHandling.js"></script>
+
+
+
+        <!-- The Assembly DemoFramework. -->
+
+        <script src="./js/demo-framework.js"></script>
+
+
+
+        <script>
+            // Configuring the underscore template engine.
+            _.templateSettings.variable = '$$$';
+
+            // Creating the package for the app to reside in.
+            var pkg = new Package();
+        </script>
+
+
+
+        <!-- The DemoApplication code. -->
+
+        <script src="./js/demo-app/main.js"></script>
+        <script src="./js/demo-app/app.js"></script>
+        <script src="./js/demo-app/settings.js"></script>
+        <script src="./js/demo-app/routes.js"></script>
+        <script src="./js/demo-app/actions/failing.js"></script>
+        <script src="./js/demo-app/actions/notFound.js"></script>
+        <script src="./js/demo-app/actions/pages.js"></script>
+        <script src="./js/demo-app/models/City.js"></script>
+        <script src="./js/demo-app/models/OwmWeatherState.js"></script>
+        <script src="./js/demo-app/models/Page.js"></script>
+        <script src="./js/demo-app/resources/CitiesResource.js"></script>
+        <script src="./js/demo-app/resources/OpenWeatherMapApi.js"></script>
+        <script src="./js/demo-app/resources/PagesResource.js"></script>
+        <script src="./js/demo-app/views/CityListView.js"></script>
+        <script src="./js/demo-app/views/CityView.js"></script>
+        <script src="./js/demo-app/views/LayoutView.js"></script>
+        <script src="./js/demo-app/views/SimpleView.js"></script>
+
+
+
+        <!-- The templates used in the app. -->
+
+        <script type="text/html" id="tmplLayout">
+            <header>
+                <h1>California Weather Now</h1>
+                <p>An <a href="https://github.com/mcmlxxxiii/Assembly.js" class="underlined">Assembly.js</a> demo application</p>
+
+                <ul data-role="menu" class="menu">
+                    <li data-menu-section="home"><a data-role="app-link" href="<%= $$$.linkTo('home') %>">Home</a></li>
+                    <li data-menu-section="cities"><a data-role="app-link" href="<%= $$$.linkTo('cities') %>">Cities</a></li>
+                    <li data-menu-section="links"><a data-role="app-link" href="<%= $$$.linkTo('page', 'links') %>">Links</a></li>
+                    <!--<li><a data-role="app-link" href="#/lost">Lost page</a></li> -->
+                </ul>
+            </header>
+            <section>
+                <h1><span></span> <small></small></h1>
+                <div></div>
+            </section>
+        </script>
+
+        <script type="text/html" id="tmplCityList">
+            <ul class="cities">
+            <% _($$$.cityList).each(function (city) { %>
+                <li>
+                    <a href="<%= city.getLinkTo() %>" data-role="app-link"><%= city.name %></a>
+                </li>
+            <% }) %>
+            </ul>
+        </script>
+
+        <script type="text/html" id="tmplCity">
+            <% _($$$.weather.icons).each(function (group) { %>
+                <div class="weather-cond-group"><img src="<%= group[0] %>" />&nbsp;<span><%= group[1] %></span></div>
+            <% }) %>
+            <dl class="weather">
+              <dt>Temperature</dt>
+              <dd><%= $$$.weather.temperature %> &#8457;</dd>
+              <dd class="small">Min: <%= $$$.weather.minTemperature %> &#8457;</dd>
+              <dd class="small">Max: <%= $$$.weather.maxTemperature %> &#8457;</dd>
+              <dt>Humidity</dt>
+              <dd><%= $$$.weather.humidity %>%</dd>
+            </dl>
+        </script>
+
+
+
+        <!-- Bootstrapping the app here. -->
+
+        <script>
+            $(function () {
+                var bootstrap = pkg.get('main');
+                bootstrap().done(function (appContainer) {
+                    window.document.body.appendChild(appContainer);
+                }).fail(function () {
+                    window.document.writeln('<h1>Please come back later ;(</h1>');
+                });
+            });
+        </script>
     </head>
 
     <body></body>

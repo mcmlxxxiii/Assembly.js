@@ -1,4 +1,6 @@
-define(['router'], function (router) {
+pkg.privateModule('routes', function () {
+
+    var router = new Router;
 
     router.addRoute({
         path: '/',
@@ -37,4 +39,8 @@ define(['router'], function (router) {
         pattern: '/*',
         action: 'notFound'
     });
+
+    router.initialize();
+
+    return router;
 });

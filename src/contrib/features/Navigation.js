@@ -9,7 +9,7 @@ Assembly.registerFeature('Navigation', function (
 
     var compat = Assembly.compat;
 
-    frameworkPrivate.NavigationType = {
+    framework.NavigationType = {
         ANCHOR: 'anchor',
         PATH: 'path'
     };
@@ -17,19 +17,19 @@ Assembly.registerFeature('Navigation', function (
     this.registerInitializationStep('Add_Navigation', function (
             app, appPrivate, appConfig, proceed, terminate) {
 
-        this.dependsOn('Add_Request_Handling', 'Add_Routing');
+        this.dependsOnSteps('Add_Request_Handling', 'Add_Routing');
 
         var navigationType = objectHasValue(
-                frameworkPrivate.NavigationType, appConfig.navigation) ?
+                framework.NavigationType, appConfig.navigation) ?
                     appConfig.navigation :
-                    frameworkPrivate.NavigationType.ANCHOR;
+                    framework.NavigationType.ANCHOR;
 
         var nav = {};
         switch (navigationType) {
 
             // NB: uri always includes baseUri.
 
-            case frameworkPrivate.NavigationType.ANCHOR:
+            case framework.NavigationType.ANCHOR:
                 nav.getUriFromElement = function (el) {
                     return compat.trim(el.getAttribute('href'));
                 };
@@ -49,11 +49,11 @@ Assembly.registerFeature('Navigation', function (
                     return uri;
                 };
                 nav.makeUriForPath = function (path) {
-                    return nav.baseUri + '/#' + path;
+                    return nav.baseUri + '#' + path;
                 };
                 break;
 
-            case frameworkPrivate.NavigationType.PATH:
+            case framework.NavigationType.PATH:
                 nav.getUriFromElement = function (el) {
                     return compat.trim(el.getAttribute('href'));
                 };
@@ -87,7 +87,7 @@ Assembly.registerFeature('Navigation', function (
 
 
         appPrivate.stripBaseUri = function (uri) {
-            if (navigationType === frameworkPrivate.NavigationType.PATH) {
+            if (navigationType === framework.NavigationType.PATH) {
                 if (uri.substr(0, nav.baseUri.length) === nav.baseUri) {
                     uri = uri.substr(nav.baseUri.length);
                 }

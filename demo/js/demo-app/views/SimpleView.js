@@ -1,4 +1,4 @@
-define([ 'app'], function (app) {
+pkg.privateModule('views/SimpleView', function () {
 
     function SimpleView(html) {
         this.DOM = {
