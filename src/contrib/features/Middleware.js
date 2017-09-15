@@ -19,7 +19,7 @@ Assembly.registerFeature('Middleware', function (
     this.registerInitializationStep('Start_Middleware_Engine', function (
             app, appPrivate, appConfig, proceed, terminate) {
 
-        this.dependsOn('Add_Middleware_Engine');
+        this.dependsOnStep('Add_Middleware_Engine');
 
         appPrivate.middlewareEngine.start(app, appConfig.middleware);
 

@@ -1,4 +1,6 @@
-define(['app'], function (app) {
+pkg.privateModule('models/City', function () {
+    var pkg = this;
+    var app = pkg.app;
 
     function City(data) {
         $.extend(this, data);

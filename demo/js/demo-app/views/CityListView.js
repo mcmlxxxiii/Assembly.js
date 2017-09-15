@@ -1,12 +1,9 @@
-define([
-    'app',
-    'text!templates/CityList.html'],
-
-function (app, tmplCityList) {
-
+pkg.privateModule('views/CityListView', function () {
+    var pkg = this;
+    var app = pkg.app;
 
     function CityListView(cityList) {
-        var rendered = app.renderTemplate(tmplCityList, {
+        var rendered = app.renderTemplate('tmplCityList', {
             cityList: cityList
         });
 

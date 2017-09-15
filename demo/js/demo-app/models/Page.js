@@ -1,4 +1,4 @@
-define(['app'], function (app) {
+pkg.privateModule('models/Page', function () {
 
     function Page(data) {
         $.extend(this, data);

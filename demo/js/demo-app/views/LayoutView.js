@@ -1,12 +1,8 @@
-define([
-    'app',
-    'text!templates/Layout.html'],
-
-function (app, tmplLayout) {
-
+pkg.privateModule('views/LayoutView', function () {
+    var pkg = this;
 
     function LayoutView() {
-        var rendered = app.renderTemplate(tmplLayout);
+        var rendered = pkg.app.renderTemplate('tmplLayout');
         var container = $('<div></div>').html(rendered);
 
         this.DOM = {

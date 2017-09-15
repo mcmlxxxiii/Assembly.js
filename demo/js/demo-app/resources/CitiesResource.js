@@ -1,6 +1,5 @@
-define(['app', 'models/City'],
-
-function (app, City) {
+pkg.privateModule('resources/CitiesResource', function () {
+    var pkg = this;
 
     var cachedList = null;
 
@@ -11,10 +10,10 @@ function (app, City) {
             get.resolve(cachedList);
         } else {
             $.ajax({
-                url: app.settings.dataApi.citiesJsonUrl
+                url: pkg.settings.dataApi.citiesJsonUrl
             }).done(function (json) {
                 cachedList = _(json).map(function (data) {
-                    return new City(data);
+                    return new pkg.models.City(data);
                 });
                 get.resolve(cachedList);
             }).fail(get.reject);
@@ -36,7 +35,7 @@ function (app, City) {
             } else {
                 find.reject();
             }
-        }).fail(find.reject);;
+        }).fail(find.reject);
 
         return find.promise();
     };
@@ -46,4 +45,3 @@ function (app, City) {
         findByToken: findByToken
     };
 });
-

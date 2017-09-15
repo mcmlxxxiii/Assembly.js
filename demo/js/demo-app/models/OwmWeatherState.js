@@ -1,4 +1,5 @@
-define(['app'], function (app) {
+pkg.privateModule('models/OwmWeatherState', function () {
+    var pkg = this;
 
     function OwmWeatherState(data) {
         this.temperature = data.main.temp;
@@ -6,7 +7,7 @@ define(['app'], function (app) {
         this.maxTemperature = data.main.temp_max;
         this.humidity = data.main.humidity;
         this.icons = _(data.weather).map(function (weatherGroup) {
-            return [ app.settings.openWeatherMapApi.iconUrl(weatherGroup.icon),
+            return [ pkg.settings.openWeatherMapApi.iconUrl(weatherGroup.icon),
                      weatherGroup.description ];
         });
         this.datetime = new Date(data.dt * 1000);

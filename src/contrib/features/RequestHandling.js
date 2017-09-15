@@ -6,7 +6,7 @@ Assembly.registerFeature('Request_Handling', function (
     this.registerInitializationStep('Add_Request_Handling', function (
             app, appPrivate, appConfig, proceed, terminate) {
 
-        this.dependsOn('Add_Middleware_Engine');
+        this.dependsOnStep('Add_Middleware_Engine');
 
         app._handleRequest = function (request) {
             var finish = compat.Deferred();
